@@ -44,20 +44,25 @@ public class BlockChain {
 
     }
 
-    public void isValid() {
+    public boolean isValid() {
+
+        boolean validity = true;
 
         for(int i = chain.size() - 1; i > 0; i--) {
 
             if( !(chain.get(i).getHash().equals(chain.get(i).computeHash()) )) {
                 System.out.println("Chain is invalid");
-                return;
+                validity = false;
+                break;
             }
 
             if( !(chain.get(i).getPreviousHash().equals(chain.get(i - 1).computeHash())) ){
                 System.out.println("Chain is invalid");
-                return;
+                validity = false;
+                break;
             }
         }
+        return validity;
 
     }
 

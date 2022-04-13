@@ -21,7 +21,7 @@ public class Driver {
 
         funCoin.displayChain();
 
-        funCoin.isValid();
+        System.out.println(funCoin.isValid());
 
     }
 
