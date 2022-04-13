@@ -13,8 +13,10 @@ public class Block {
     private String Hash;
     private String previousHash;
     private String data;
+    private int nonce;
 
 
+    // constructor for new blocks
     public Block(String version, Date timestamp, String data) {
 
         this.version = version;
@@ -24,6 +26,7 @@ public class Block {
 
     }
 
+    // method to compute hash for a block
     public String computeHash() {
         String DataToHash = "" + this.version + this.timestamp + this.previousHash + this.data;
 
@@ -45,6 +48,22 @@ public class Block {
 
     }
 
+    // method for mining a block
+
+    public void mineBlock(int difficulty) {
+        String target = new String(new char[difficulty]).replace('\0', '0');
+        while(! (Hash.substring(0, difficulty).equals(target))) {
+
+            nonce++;
+            this.Hash = computeHash();
+
+        }
+
+        System.out.println("Block mined " + Hash);
+    }
+
+
+    // generated getters and setters
     public String getVersion() {
         return version;
     }
@@ -77,11 +96,13 @@ public class Block {
         this.previousHash = previousHash;
     }
 
-    public String getData() {
-        return data;
-    }
+    public String getData() { return data; }
 
     public void setData(String data) {
         this.data = data;
     }
+
+    public int getNonce() { return nonce; }
+
+    public void setNonce(int nonce) { this.nonce = nonce; }
 }
